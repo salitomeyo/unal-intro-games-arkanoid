@@ -50,11 +50,11 @@ public class Ball : MonoBehaviour
 
         if(Mathf.Abs(velocity.x) < BALL_VELOCITY_MIN_AXIS_VALUE) 
         {
-            velocity.x += Mathf.Sign(velocity.x) * BALL_VELOCITY_MIN_AXIS_VALUE * Time.deltaTime;
+            velocity.x += Mathf.Sign(velocity.x) * 30 * Time.deltaTime;
         }
         else if (Mathf.Abs(velocity.y) < BALL_VELOCITY_MIN_AXIS_VALUE)
         {   
-            velocity.y += Mathf.Sign(velocity.y) * BALL_VELOCITY_MIN_AXIS_VALUE * Time.deltaTime;
+            velocity.y += Mathf.Sign(velocity.y) * 30 * Time.deltaTime;
         }
     }
 

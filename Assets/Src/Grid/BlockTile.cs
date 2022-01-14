@@ -2,8 +2,8 @@ using UnityEngine;
 
 public enum BlockType
 {
-   Small,
-   Big
+    Small,
+    Big
 }
 
 public enum BlockColor
