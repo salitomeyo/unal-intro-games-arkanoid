@@ -27,15 +27,4 @@ public class Paddle : MonoBehaviour
         
         transform.position = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime * _speed);
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        Powerups powerupHit;
-        if (!other.collider.TryGetComponent(out powerupHit))
-        {
-            return;
-        }
-        
-        powerupHit.OnHitCollision();
-    }
 }

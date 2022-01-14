@@ -3,26 +3,98 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum PowerUpType
+{
+    Slow,
+    Fast,
+    Multiball,
+    Bigger,
+    Smaller
+}
+
 public class Powerups : MonoBehaviour
 {
     private Rigidbody2D _rb;
+    private SpriteRenderer _renderer;
     private Collider2D _collider;
-    public void Start()
+    [SerializeField] 
+    private PowerUpType _type = PowerUpType.Slow;
+
+    private const string POWERUP_PATH = "Sprites/PowerUps/PowerUp_{0}";
+
+    static Sprite GetPowerupSprite(PowerUpType type)
     {
-        Init();
+        string path = string.Empty;
+        path = string.Format(POWERUP_PATH, type);
+
+        if (string.IsNullOrEmpty(path))
+        {
+            return null;
+        }
+
+        return Resources.Load<Sprite>(path);
     }
 
     public void Init()
     {
         _rb = GetComponent<Rigidbody2D>();
+
         _collider = GetComponent<Collider2D>();
-        
         _collider.enabled = true;
+
+        _renderer = GetComponent<SpriteRenderer>();
+
+        float rand = Random.value;
+        if (rand < 0.20)
+        {
+            _type = PowerUpType.Slow;
+        }
+        else if (rand < 0.40)
+        {
+            _type = PowerUpType.Fast;
+        }
+        else if (rand < 0.60)
+        {
+            _type = PowerUpType.Multiball;
+        }
+        else if (rand < 0.80)
+        {
+            _type = PowerUpType.Bigger;
+        }
+        else
+        {
+            _type = PowerUpType.Smaller;
+        }
+        _renderer.sprite = GetPowerupSprite(_type);
     }
 
-    public void OnHitCollision()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        _collider.enabled = false;
-        gameObject.SetActive(false);
+        if (other.gameObject.name == "Paddle")
+        {
+            _collider.enabled = false;
+            gameObject.SetActive(false);
+
+            // if (_type == PowerUpType.Slow)
+            // {
+            //     Debug.Log(_type);
+            // }
+            // else if (_type == PowerUpType.Fast)
+            // {
+            //     Debug.Log(_type);
+            // }
+            // else if (_type == PowerUpType.Multiball)
+            // {
+            //     Debug.Log(_type);
+            // }
+            // else if (_type == PowerUpType.Bigger)
+            // {
+            //     Debug.Log(_type);
+            // }
+            // else
+            // {
+            //     Debug.Log(_type);
+            // }
+        }
     }
 }

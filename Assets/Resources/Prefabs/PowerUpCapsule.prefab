@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1917435050920576262}
   - component: {fileID: -2415679488740171429}
   m_Layer: 0
-  m_Name: PowerUpCapsulle
+  m_Name: PowerUpCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

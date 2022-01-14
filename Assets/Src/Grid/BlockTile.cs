@@ -1,4 +1,5 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum BlockType
 {
@@ -37,7 +38,6 @@ public class BlockTile : MonoBehaviour
     
     private int _totalHits = 1;
     private int _currentHits = 0;
-
     private int _id;
     
     public void SetData(int id, BlockColor color)
@@ -79,9 +79,21 @@ public class BlockTile : MonoBehaviour
         _currentHits++;
         if (_currentHits >= _totalHits)
         {
+            float x = gameObject.transform.position.x;
+            float y = gameObject.transform.position.y;
+
             _collider.enabled = false;
             gameObject.SetActive(false);
             ArkanoidEvent.OnBlockDestroyedEvent?.Invoke(_id);
+
+            if (Random.value < 0.25)
+            {
+                Powerups powerupPrefab = Resources.Load<Powerups>("Prefabs/PowerUpCapsule");
+
+                Powerups powerup = Instantiate<Powerups>(powerupPrefab, new Vector3(x, y, 0), Quaternion.identity);
+                
+                powerup.Init();
+            }
         }
         if (_currentHits == 1)
         {
