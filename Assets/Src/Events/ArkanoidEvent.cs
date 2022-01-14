@@ -10,4 +10,6 @@ public static class ArkanoidEvent
     public static BlockDestroyedAction OnBlockDestroyedEvent;
     public delegate void ScoreUpdatedAction(int score, int totalScore);
     public static ScoreUpdatedAction OnScoreUpdatedEvent;
+    public delegate void PowerUpsAction(Powerups powerups);
+    public static PowerUpsAction OnPowerUpsEvent;
 }

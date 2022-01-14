@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 public class ArkanoidController : MonoBehaviour
 {
     [SerializeField] private GridController _gridController;
@@ -21,12 +21,14 @@ public class ArkanoidController : MonoBehaviour
     {
         ArkanoidEvent.OnBallReachDeadZoneEvent += OnBallReachDeadZone;
         ArkanoidEvent.OnBlockDestroyedEvent += OnBlockDestroyed;
+        ArkanoidEvent.OnPowerUpsEvent += onPowerUps;
     }
 
     private void OnDestroy()
     {
         ArkanoidEvent.OnBallReachDeadZoneEvent -= OnBallReachDeadZone;
         ArkanoidEvent.OnBlockDestroyedEvent -= OnBlockDestroyed;
+        ArkanoidEvent.OnPowerUpsEvent -= onPowerUps;
     }
 
     private void InitGame()
@@ -46,7 +48,14 @@ public class ArkanoidController : MonoBehaviour
         ball.Init();
         _balls.Add(ball);
     }
-       
+
+    private void SetBall()
+    {
+        Ball ball = CreateBallAt(BALL_INIT_POSITION);
+        ball.Init();
+        _balls.Add(ball);
+    }
+
     private Ball CreateBallAt(Vector2 position)
     {
         if (_ballPrefab == null)
@@ -120,6 +129,33 @@ public class ArkanoidController : MonoBehaviour
                 _gridController.BuildGrid(_levels[_currentLevel]);
             }
 
+        }
+    }
+
+    private void onPowerUps(Powerups powerup)
+    {
+        if (powerup.Type == PowerUpType.Slow)
+        {
+            Debug.Log(_balls[0]);
+        }
+        else if (powerup.Type == PowerUpType.Fast)
+        {
+            Debug.Log(_balls[0]);
+        }
+        else if (powerup.Type == PowerUpType.Multiball)
+        {
+            SetBall();
+            SetBall();
+        }
+        else if (powerup.Type == PowerUpType.Bigger)
+        {
+            SetBall();
+            SetBall();
+        }
+        else
+        {
+            SetBall();
+            SetBall();
         }
     }
 }

@@ -19,6 +19,9 @@ public class Powerups : MonoBehaviour
     private Collider2D _collider;
     [SerializeField] 
     private PowerUpType _type = PowerUpType.Slow;
+    private ArkanoidController _controller = null;
+
+    public PowerUpType Type => _type;
 
     private const string POWERUP_PATH = "Sprites/PowerUps/PowerUp_{0}";
 
@@ -74,27 +77,7 @@ public class Powerups : MonoBehaviour
         {
             _collider.enabled = false;
             gameObject.SetActive(false);
-
-            // if (_type == PowerUpType.Slow)
-            // {
-            //     Debug.Log(_type);
-            // }
-            // else if (_type == PowerUpType.Fast)
-            // {
-            //     Debug.Log(_type);
-            // }
-            // else if (_type == PowerUpType.Multiball)
-            // {
-            //     Debug.Log(_type);
-            // }
-            // else if (_type == PowerUpType.Bigger)
-            // {
-            //     Debug.Log(_type);
-            // }
-            // else
-            // {
-            //     Debug.Log(_type);
-            // }
+            ArkanoidEvent.OnPowerUpsEvent?.Invoke(this);
         }
     }
 }
