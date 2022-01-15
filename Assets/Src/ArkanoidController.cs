@@ -137,8 +137,6 @@ public class ArkanoidController : MonoBehaviour
 
     private void onPowerUps(Powerups powerup)
     {
-        _totalScore += 50;
-        ArkanoidEvent.OnScoreUpdatedEvent?.Invoke(50, _totalScore);
         if (powerup.Type == PowerUpType.ScorePoints)
         {
             if (powerup.State == 1)
