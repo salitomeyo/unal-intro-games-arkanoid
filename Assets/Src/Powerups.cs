@@ -9,7 +9,8 @@ public enum PowerUpType
     Fast,
     Multiball,
     Bigger,
-    Smaller
+    Smaller,
+    ScorePoints
 }
 
 public class Powerups : MonoBehaviour

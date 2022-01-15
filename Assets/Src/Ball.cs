@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
     private float _maxSpeed = 7;
 
     private Rigidbody2D _rb;
+    public Rigidbody2D rigbod => _rb;
     private Collider2D _collider;
 
     public void Init()
@@ -69,5 +70,15 @@ public class Ball : MonoBehaviour
     {
         _collider.enabled = false;
         gameObject.SetActive(false);
+    }
+
+    public void SetSpeed(float add)
+    {
+        Vector2 velocity = _rb.velocity;
+
+        _minSpeed = _minSpeed + add;
+        _maxSpeed = _maxSpeed + add;
+        velocity.x = velocity.x + add;
+        velocity.y = velocity.y + add;
     }
 }

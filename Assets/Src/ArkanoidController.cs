@@ -14,6 +14,9 @@ public class ArkanoidController : MonoBehaviour
 
     private Ball _ballPrefab = null;
     private List<Ball> _balls = new List<Ball>();
+
+    [SerializeField]
+    private Paddle _paddle;
         
     private int _totalScore = 0;
 
@@ -136,26 +139,36 @@ public class ArkanoidController : MonoBehaviour
     {
         if (powerup.Type == PowerUpType.Slow)
         {
-            Debug.Log(_balls[0]);
+            Debug.Log(_balls[0].rigbod.velocity.magnitude);
+            _balls[0].SetSpeed(-5);
+            Debug.Log(_balls[0].rigbod.velocity.magnitude);
         }
         else if (powerup.Type == PowerUpType.Fast)
         {
-            Debug.Log(_balls[0]);
+            Debug.Log(_balls[0].rigbod.velocity.magnitude);
+            _balls[0].SetSpeed(5);
+            Debug.Log(_balls[0].rigbod.velocity.magnitude);
         }
         else if (powerup.Type == PowerUpType.Multiball)
         {
-            SetBall();
-            SetBall();
+            if (_balls.Count == 1)
+            {
+                SetBall();
+                SetBall();
+            }
+            else if (_balls.Count == 2)
+            {
+                SetBall();
+            }
+            else {}
         }
         else if (powerup.Type == PowerUpType.Bigger)
         {
-            SetBall();
-            SetBall();
+            _paddle.SetSize(0.2f);
         }
         else
         {
-            SetBall();
-            SetBall();
+            _paddle.SetSize(-0.2f);
         }
     }
 }
