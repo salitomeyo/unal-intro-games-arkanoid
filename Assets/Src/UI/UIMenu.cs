@@ -16,12 +16,12 @@ public class UIMenu : MonoBehaviour
     {
         _canvasGroup.alpha = 0;
     }
-   
+    
     private void OnGameOver()
     {
         _canvasGroup.alpha = 1;
     }
-   
+    
     private void OnDestroy()
     {
         ArkanoidEvent.OnGameStartEvent -= OnGameStart;

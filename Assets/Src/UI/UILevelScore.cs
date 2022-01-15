@@ -23,7 +23,7 @@ public class UILevelScore : MonoBehaviour
     {
         _canvasGroup.alpha = 1;
     }
-   
+    
     private void OnGameOver()
     {
         _canvasGroup.alpha = 0;
@@ -36,7 +36,7 @@ public class UILevelScore : MonoBehaviour
         ArkanoidEvent.OnGameOverEvent -= OnGameOver;
     }
     
-    private void OnScoreUpdated(int score, int totalScore)
+    public void OnScoreUpdated(int score, int totalScore)
     {
         _scoreText.text = string.Format(SCORE_TEXT_TEMPLATE, totalScore);
     }

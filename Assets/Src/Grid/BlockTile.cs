@@ -86,7 +86,7 @@ public class BlockTile : MonoBehaviour
             gameObject.SetActive(false);
             ArkanoidEvent.OnBlockDestroyedEvent?.Invoke(_id);
 
-            if (Random.value < 0.25)
+            if (Random.value < 1)
             {
                 Powerups powerupPrefab = Resources.Load<Powerups>("Prefabs/PowerUpCapsule");
 

@@ -17,7 +17,7 @@ public class ArkanoidController : MonoBehaviour
 
     [SerializeField]
     private Paddle _paddle;
-        
+
     private int _totalScore = 0;
 
     private void Start()
@@ -137,17 +137,30 @@ public class ArkanoidController : MonoBehaviour
 
     private void onPowerUps(Powerups powerup)
     {
-        if (powerup.Type == PowerUpType.Slow)
+        _totalScore += 50;
+        ArkanoidEvent.OnScoreUpdatedEvent?.Invoke(50, _totalScore);
+        if (powerup.Type == PowerUpType.ScorePoints)
         {
-            Debug.Log(_balls[0].rigbod.velocity.magnitude);
-            _balls[0].SetSpeed(-5);
-            Debug.Log(_balls[0].rigbod.velocity.magnitude);
-        }
-        else if (powerup.Type == PowerUpType.Fast)
-        {
-            Debug.Log(_balls[0].rigbod.velocity.magnitude);
-            _balls[0].SetSpeed(5);
-            Debug.Log(_balls[0].rigbod.velocity.magnitude);
+            if (powerup.State == 1)
+            {
+                _totalScore += 50;
+                ArkanoidEvent.OnScoreUpdatedEvent?.Invoke(50, _totalScore);
+            }
+            else if (powerup.State == 2)
+            {
+                _totalScore += 100;
+                ArkanoidEvent.OnScoreUpdatedEvent?.Invoke(100, _totalScore);
+            }
+            else if (powerup.State == 3)
+            {
+                _totalScore += 250;
+                ArkanoidEvent.OnScoreUpdatedEvent?.Invoke(250, _totalScore);
+            }
+            else
+            {
+                _totalScore += 500;
+                ArkanoidEvent.OnScoreUpdatedEvent?.Invoke(500, _totalScore);
+            }
         }
         else if (powerup.Type == PowerUpType.Multiball)
         {
